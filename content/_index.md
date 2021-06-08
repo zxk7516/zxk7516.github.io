@@ -1,8 +1,14 @@
 +++
 title = "Hello"
 description = "Hello"
-weight = 2
+paginate_by = 20
 +++
 
 
 ## Hello
+
+```rust
+fn main(){
+    println!("hello world");
+}
+```

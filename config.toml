@@ -1,4 +1,4 @@
-theme = "juice"
+theme = "after-dark"
 # The URL the site will be built for
 base_url = "https://zxk7516.github.io"
 
@@ -17,8 +17,10 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-juice_logo_path="juice.svg"
-juice_logo_name="Martice"
-juice_extra_menu = [
-    { title = "Github", link = "https://github.com/zxk7516" }
+author = "Martice"
+after_dark_menu = [
+    {url = "$BASE_URL", name = "Home"},
+    {url = "$BASE_URL/categories", name = "Categories"},
+    {url = "$BASE_URL/tags", name = "Tags"},
 ]
+after_dark_title = "Martice"
