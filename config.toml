@@ -15,8 +15,8 @@ highlight_code = true
 
 [extra]
 # Put all your custom variables here
-juice_logo_path="themes/juice/content/juice.svg"
-juice_logo_name="hello"
+juice_logo_path="juice.svg"
+juice_logo_name="Martice"
 juice_extra_menu = [
-    { title = "Github", link = "https://github.com/huhu/juice" }
+    { title = "Github", link = "https://github.com/zxk7516" }
 ]
