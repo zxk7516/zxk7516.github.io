@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+      <!-- Enable responsiveness on mobile devices-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+      <title>我是Martice</title>
+
+      
+
+      
+          <link rel="stylesheet" href="https://zxk7516.github.io/site.css">
+      
+
+      
+      
+    </head>
+
+    <body class="hack dark main container">
+        
+    
+        
+                
+                    <header>
+                        <nav itemscope itemtype="http://schema.org/SiteNavigationElement">
+                        
+                            <a itemprop="url"
+                               class=""
+                               href="https:&#x2F;&#x2F;zxk7516.github.io">
+                                <span itemprop="name">Home
+                                </span></a>
+                        
+                            <a itemprop="url"
+                               class=""
+                               href="https:&#x2F;&#x2F;zxk7516.github.io&#x2F;categories">
+                                <span itemprop="name">Categories
+                                </span></a>
+                        
+                            <a itemprop="url"
+                               class=""
+                               href="https:&#x2F;&#x2F;zxk7516.github.io&#x2F;tags">
+                                <span itemprop="name">Tags
+                                </span></a>
+                        
+                        </nav>
+                    </header>
+                
+            
+    
+
+<article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+        <h1 itemprop="headline">Java Stream 编程</h1>
+        <span class="muted">
+    <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <circle cx="16" cy="16" r="14"/>
+        <path d="M16 8 L16 16 20 20"/>
+    </svg>
+    <span>1 minute read</span>
+    <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32"
+         width="16" height="16" fill="none" stroke="currentcolor"
+         stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z"/>
+    </svg>
+
+    Published: 2021-06-08
+</span>
+    </header>
+    <div itemprop="articleBody">
+      <pre style="background-color:#2b303b;">
+<code class="language-java" data-lang="java"><span style="color:#c0c5ce;">
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.io.</span><span style="color:#ebcb8b;">BufferedReader</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.io.</span><span style="color:#ebcb8b;">FileNotFoundException</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.io.</span><span style="color:#ebcb8b;">FileReader</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.io.</span><span style="color:#ebcb8b;">IOException</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">Arrays</span><span style="color:#c0c5ce;">;
+</span><span style="color:#b48ead;">import </span><span style="color:#c0c5ce;">java.util.</span><span style="color:#ebcb8b;">List</span><span style="color:#c0c5ce;">;
+
+</span><span style="color:#b48ead;">public class </span><span style="color:#ebcb8b;">Stream </span><span style="color:#eff1f5;">{
+
+    </span><span style="color:#b48ead;">public static void </span><span style="color:#8fa1b3;">main</span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">String</span><span style="color:#b48ead;">[] </span><span style="color:#bf616a;">args</span><span style="color:#eff1f5;">) {
+        </span><span style="color:#ebcb8b;">String</span><span style="color:#eff1f5;"> filename </span><span style="color:#c0c5ce;">= &quot;</span><span style="color:#a3be8c;">C:</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">Users</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">o</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">downloads</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">The_Odyssey_-_Homer.txt</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">;
+        </span><span style="color:#b48ead;">try </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">BufferedReader</span><span style="color:#eff1f5;"> in </span><span style="color:#c0c5ce;">= </span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">BufferedReader</span><span style="color:#eff1f5;">(</span><span style="color:#b48ead;">new </span><span style="color:#ebcb8b;">FileReader</span><span style="color:#eff1f5;">(filename))) {
+            </span><span style="color:#ebcb8b;">Long</span><span style="color:#eff1f5;"> long_words_counts </span><span style="color:#c0c5ce;">=</span><span style="color:#eff1f5;"> in.</span><span style="color:#bf616a;">lines</span><span style="color:#eff1f5;">()
+                    .</span><span style="color:#bf616a;">parallel</span><span style="color:#eff1f5;">()
+                    .</span><span style="color:#bf616a;">map</span><span style="color:#eff1f5;">(
+                            (</span><span style="color:#ebcb8b;">String </span><span style="color:#bf616a;">s</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">-&gt; </span><span style="color:#eff1f5;">{
+                                </span><span style="color:#b48ead;">return </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">Long</span><span style="color:#eff1f5;">) </span><span style="color:#ebcb8b;">Arrays</span><span style="color:#eff1f5;">.</span><span style="color:#bf616a;">stream</span><span style="color:#eff1f5;">(s.</span><span style="color:#bf616a;">split</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#96b5b4;">\\</span><span style="color:#a3be8c;">PL+</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#eff1f5;">))
+                                        .</span><span style="color:#bf616a;">filter</span><span style="color:#eff1f5;">(
+                                                </span><span style="color:#bf616a;">w </span><span style="color:#b48ead;">-&gt;</span><span style="color:#eff1f5;"> w.</span><span style="color:#bf616a;">length</span><span style="color:#eff1f5;">() </span><span style="color:#c0c5ce;">&gt; </span><span style="color:#d08770;">12
+                                        </span><span style="color:#eff1f5;">).</span><span style="color:#bf616a;">count</span><span style="color:#eff1f5;">();
+                            }
+                    ).</span><span style="color:#bf616a;">reduce</span><span style="color:#eff1f5;">(
+                            (</span><span style="color:#ebcb8b;">Long</span><span style="color:#eff1f5;">) </span><span style="color:#d08770;">0</span><span style="color:#b48ead;">l</span><span style="color:#eff1f5;">,
+                            (</span><span style="color:#bf616a;">s</span><span style="color:#eff1f5;">, </span><span style="color:#bf616a;">i</span><span style="color:#eff1f5;">) </span><span style="color:#b48ead;">-&gt;</span><span style="color:#eff1f5;"> s </span><span style="color:#c0c5ce;">+</span><span style="color:#eff1f5;"> i
+                    );
+            </span><span style="color:#ebcb8b;">System</span><span style="color:#eff1f5;">.out.</span><span style="color:#bf616a;">println</span><span style="color:#eff1f5;">(</span><span style="color:#c0c5ce;">&quot;</span><span style="color:#a3be8c;">long words count: </span><span style="color:#c0c5ce;">&quot; +</span><span style="color:#eff1f5;"> long_words_counts);
+        } </span><span style="color:#b48ead;">catch </span><span style="color:#eff1f5;">(</span><span style="color:#ebcb8b;">IOException </span><span style="color:#bf616a;">e</span><span style="color:#eff1f5;">) {
+            e.</span><span style="color:#bf616a;">printStackTrace</span><span style="color:#eff1f5;">();
+        }
+
+
+    }
+}
+
+</span></code></pre>
+    </div>
+
+    
+        <footer>
+            <hr>
+            <p>
+                
+                    Published by Martice
+                
+                
+                
+            </p>
+            
+            
+        </footer>
+    
+</article>
+
+
+    </body>
+
+</html>
